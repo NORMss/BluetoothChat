@@ -12,11 +12,11 @@ class BluetoothStateReceiver(
     override fun onReceive(context: Context?, intent: Intent?) {
         val device = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent?.getParcelableExtra(
-                BluetoothDevice.EXTRA_NAME,
+                BluetoothDevice.EXTRA_DEVICE,
                 BluetoothDevice::class.java
             )
         } else {
-            intent?.getParcelableExtra(BluetoothDevice.EXTRA_NAME)
+            intent?.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
         }
         when (intent?.action) {
             BluetoothDevice.ACTION_ACL_CONNECTED -> {

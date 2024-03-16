@@ -60,56 +60,56 @@ fun ChatScreen(
                     contentDescription = "Disconnect"
                 )
             }
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-            ) {
-                items(state.messages) { message ->
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                    ) {
-                        ChatMessage(
-                            message = message,
-                            modifier = Modifier
-                                .align(
-                                    if (message.isFromLocalUser) Alignment.End else Alignment.Start
-                                )
-                        )
-                    }
-                }
-            }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                TextField(
-                    value = message.value,
-                    onValueChange = { message.value = it },
-                    modifier = Modifier.weight(1f),
-                    placeholder = {
-                        Text(
-                            text = "Massage"
-                        )
-                    }
-                )
-                IconButton(
-                    onClick = {
-                        onSendMessage(message.value)
-                        message.value = ""
-                        keyboardController?.hide()
-                    }
+        }
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            items(state.messages) { message ->
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Send,
-                        contentDescription = "Send message"
+                    ChatMessage(
+                        message = message,
+                        modifier = Modifier
+                            .align(
+                                if (message.isFromLocalUser) Alignment.End else Alignment.Start
+                            )
                     )
                 }
+            }
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            TextField(
+                value = message.value,
+                onValueChange = { message.value = it },
+                modifier = Modifier.weight(1f),
+                placeholder = {
+                    Text(
+                        text = "Massage"
+                    )
+                }
+            )
+            IconButton(
+                onClick = {
+                    onSendMessage(message.value)
+                    message.value = ""
+                    keyboardController?.hide()
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Send,
+                    contentDescription = "Send message"
+                )
             }
         }
     }
