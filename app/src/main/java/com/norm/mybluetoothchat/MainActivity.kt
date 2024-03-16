@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.norm.mybluetoothchat.presentation.BluetoothViewModel
+import com.norm.mybluetoothchat.presentation.components.ChatScreen
 import com.norm.mybluetoothchat.presentation.components.DeviceScreen
 import com.norm.mybluetoothchat.ui.theme.MyBluetoothChatTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -109,6 +110,14 @@ class MainActivity : ComponentActivity() {
                                 CircularProgressIndicator()
                                 Text("Connecting..")
                             }
+                        }
+
+                        state.isConnected -> {
+                            ChatScreen(
+                                state = state,
+                                onDisconnect = viewModel::disconnectFromDevice,
+                                onSendMessage = viewModel::sendMessage,
+                            )
                         }
 
                         else -> {
